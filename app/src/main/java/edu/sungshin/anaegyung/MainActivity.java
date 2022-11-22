@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     textView.setText(String.valueOf(testAccount.getIndex())+" "+String.valueOf(testAccount.getDirect()));
                     tts.speak(String.valueOf(testAccount.getIndex())+" "+String.valueOf(testAccount.getDirect()),TextToSpeech.QUEUE_FLUSH, null);
                 } else{
-                    Toast.makeText(MainActivity.this, "데이터 없음", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
