@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,11 +22,15 @@ public class MainActivity extends AppCompatActivity {
     public String TAG="TAG";
     private DatabaseReference mDatabaseRef;
     private TextToSpeech tts;
+    TextView textView;
+    String name,dir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textView=findViewById(R.id.textView);
+
         tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -42,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue(TestAccount.class)!=null){
                     TestAccount testAccount=snapshot.getValue(TestAccount.class);
-                    Log.d("TAG",String.valueOf(testAccount.getArea()));
-                    Log.d("TAG",String.valueOf(testAccount.getDirect()));
+
+                    textView.setText(String.valueOf(testAccount.getIndex())+" "+String.valueOf(testAccount.getDirect()));
+                    tts.speak(String.valueOf(testAccount.getIndex())+" "+String.valueOf(testAccount.getDirect()),TextToSpeech.QUEUE_FLUSH, null);
                 } else{
                     Toast.makeText(MainActivity.this, "데이터 없음", Toast.LENGTH_SHORT).show();
                 }
@@ -54,9 +60,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        tts.speak("테스트",TextToSpeech.QUEUE_FLUSH, null);
-
-
     }
 }
