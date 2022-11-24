@@ -3,8 +3,11 @@ package edu.sungshin.anaegyung;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
     public String TAG="TAG";
     private DatabaseReference mDatabaseRef;
     private TextToSpeech tts;
-    TextView textView;
-    String name,dir;
+    Button button1,button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView=findViewById(R.id.textView);
+        button1=findViewById(R.id.button1);
+        button2=findViewById(R.id.button2);
 
         tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -42,22 +45,37 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("Anaegyung");
 
-        mDatabaseRef.child("TestAccount").child("info").addValueEventListener(new ValueEventListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(TestAccount.class)!=null){
-                    TestAccount testAccount=snapshot.getValue(TestAccount.class);
-
-                    textView.setText(String.valueOf(testAccount.getIndex())+" "+String.valueOf(testAccount.getDirect()));
-                    tts.speak(String.valueOf(testAccount.getIndex())+" "+String.valueOf(testAccount.getDirect()),TextToSpeech.QUEUE_FLUSH, null);
-                } else{
-
-                }
+            public void onClick(View view) {
+                tts.speak("실시간 물체 찾기 기능으로, 길게 클릭 후 찾으려는 물체를 입력해주세요.",TextToSpeech.QUEUE_FLUSH, null);
             }
+        });
 
+        button1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public boolean onLongClick(View view) {
+                Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+                startActivity(intent);
+                finish();
+                return false;
+            }
+        });
 
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts.speak("실시간 음성 안내 기능으로, 길게 클릭 시 주변 물체 중 가장 가까이 있는 물체를 알려드립니다.",TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
+        button2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent=new Intent(MainActivity.this,ThirdActivity.class);
+                startActivity(intent);
+                finish();
+                return false;
             }
         });
     }
