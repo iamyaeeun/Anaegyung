@@ -71,6 +71,22 @@ public class SecondActivity extends AppCompatActivity {
         userAccount=new UserAccount(1,0,0);
 
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("Anaegyung");
+        mDatabaseRef.child("UserAccount").child("info").setValue(userAccount)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        Toast.makeText(SecondActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
+                        tts.speak(detect+" "+direct, TextToSpeech.QUEUE_FLUSH, null);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        Toast.makeText(SecondActivity.this, "저장을 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

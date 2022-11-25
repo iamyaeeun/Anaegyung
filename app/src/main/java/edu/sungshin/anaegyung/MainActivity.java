@@ -1,6 +1,7 @@
 package edu.sungshin.anaegyung;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         button1=findViewById(R.id.button1);
         button2=findViewById(R.id.button2);
+
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.hide();
 
         tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override

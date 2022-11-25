@@ -20,7 +20,9 @@
         android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="확인" />
+        android:text="확인"
+        android:textStyle="bold"
+        android:backgroundTint="#F8E436"/>
 
     <TextView
         android:id="@+id/textView"
@@ -33,5 +35,6 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="뒤로가기" />
+        android:text="뒤로가기"
+        android:backgroundTint="#6B80FA"/>
 </LinearLayout>

@@ -12,14 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:backgroundTint="#F8E436"
         android:text="실시간 물체 찾기"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:backgroundTint="#6B80FA"
         android:text="실시간 음성 안내"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:textStyle="bold" />
 </LinearLayout>
