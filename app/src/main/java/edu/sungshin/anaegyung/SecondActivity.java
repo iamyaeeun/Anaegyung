@@ -16,8 +16,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
@@ -26,6 +29,7 @@ public class SecondActivity extends AppCompatActivity {
     EditText editText;
     Button ok,back;
     TextView textView;
+    String directList[] = {"좌측", "전방", "우측"};
     String detectList[] = {"사람", "자전거", "자동차", "오토바이", "비행기",
             "버스", "기차", "트럭", "배", "신호등",
             "소화기", "표지판", "정지 표지판", "주차권 자동 판매기", "벤치",
@@ -77,7 +81,7 @@ public class SecondActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         // Write was successful!
                         Toast.makeText(SecondActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
-                        tts.speak(detect+" "+direct, TextToSpeech.QUEUE_FLUSH, null);
+                        //tts.speak(detect+" "+direct, TextToSpeech.QUEUE_FLUSH, null);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -105,7 +109,7 @@ public class SecondActivity extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     // Write was successful!
                                     Toast.makeText(SecondActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
-                                    tts.speak(detect+" "+direct, TextToSpeech.QUEUE_FLUSH, null);
+                                    //tts.speak(detect+" "+direct, TextToSpeech.QUEUE_FLUSH, null);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -119,6 +123,25 @@ public class SecondActivity extends AppCompatActivity {
                     Toast.makeText(SecondActivity.this,"해당 물체는 탐지할 수 없습니다.",Toast.LENGTH_SHORT).show();
                 }
 
+                mDatabaseRef.child("UserAccount").child("info").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue(UserAccount.class)!=null){
+                            UserAccount userAccount=snapshot.getValue(UserAccount.class);
+                            int obIndex = userAccount.getObIndex();
+                            int obDirect = userAccount.getObDirect();
+
+                            String sent = directList[obDirect] + "에 " + detectList[obIndex] + " 있습니다.";
+                            textView.setText(String.valueOf(userAccount.getObIndex())+" "+String.valueOf(userAccount.getObDirect()));
+                            tts.speak(String.valueOf(sent), TextToSpeech.QUEUE_FLUSH, null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 textView.setText(String.valueOf(userAccount.getObIndex())+" "+String.valueOf(userAccount.getObDirect()));
             }
         });
