@@ -111,6 +111,27 @@ public class SecondActivity extends AppCompatActivity {
                                     // Write was successful!
                                     Toast.makeText(SecondActivity.this, "저장을 완료했습니다.", Toast.LENGTH_SHORT).show();
                                     //tts.speak(detect+" "+direct, TextToSpeech.QUEUE_FLUSH, null);
+
+                                    mDatabaseRef.child("UserAccount").child("info").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if(snapshot.getValue(UserAccount.class)!=null){
+                                                UserAccount userAccount=snapshot.getValue(UserAccount.class);
+                                                int obIndex = userAccount.getObIndex() -1;
+                                                int obDirect = userAccount.getObDirect();
+
+                                                String sent = directList[obDirect] + "에 " + detectList[obIndex] + " 있습니다.";
+                                                tts.speak(String.valueOf(sent), TextToSpeech.QUEUE_FLUSH, null);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -124,24 +145,7 @@ public class SecondActivity extends AppCompatActivity {
                     Toast.makeText(SecondActivity.this,"해당 물체는 탐지할 수 없습니다.",Toast.LENGTH_SHORT).show();
                 }
 
-                mDatabaseRef.child("UserAccount").child("info").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.getValue(UserAccount.class)!=null){
-                            UserAccount userAccount=snapshot.getValue(UserAccount.class);
-                            int obIndex = userAccount.getObIndex() -1;
-                            int obDirect = userAccount.getObDirect();
 
-                            String sent = directList[obDirect] + "에 " + detectList[obIndex] + " 있습니다.";
-                            tts.speak(String.valueOf(sent), TextToSpeech.QUEUE_FLUSH, null);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
             }
         });
 
