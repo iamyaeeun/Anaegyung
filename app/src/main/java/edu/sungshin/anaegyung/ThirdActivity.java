@@ -26,7 +26,6 @@ import java.util.Locale;
 public class ThirdActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     Button back;
-    TextView textView;
     String sent;
     String nameList[] = {"사람이", "자전거가", "차가", "오토바이가", "버스가", "트럭이", "스케이트 보드가"};
     String directList[] = {"좌측", "전방", "우측"};
@@ -37,7 +36,6 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        textView=findViewById(R.id.textView);
         back=findViewById(R.id.back);
         tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -77,7 +75,6 @@ public class ThirdActivity extends AppCompatActivity {
                     int direct = testAccount.getDirect();
 
                     sent = directList[direct] + "에 " + nameList[index] + " 있습니다.";
-                    textView.setText(String.valueOf(testAccount.getIndex())+" "+String.valueOf(testAccount.getDirect()));
                     tts.speak(String.valueOf(sent), TextToSpeech.QUEUE_FLUSH, null);
                 }
             }

@@ -4,20 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".ThirdActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ThirdActivity"
-        android:textSize="30dp"/>
 
     <Button
         android:id="@+id/back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
+        android:layout_margin="30dp"
         android:text="뒤로가기"
-        android:backgroundTint="#6B80FA"/>
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:backgroundTint="#806B80FA"/>
 </LinearLayout>

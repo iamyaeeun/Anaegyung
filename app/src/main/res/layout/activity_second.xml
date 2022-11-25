@@ -14,27 +14,26 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="찾으려는 물체를 입력하세요"
+        android:layout_margin="30dp"
         android:textSize="30dp"/>
 
     <Button
         android:id="@+id/ok"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
+        android:layout_margin="30dp"
         android:text="확인"
+        android:textSize="30dp"
         android:textStyle="bold"
-        android:backgroundTint="#F8E436"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SecondActivity"
-        android:textSize="30dp"/>
+        android:backgroundTint="#80FDD835"/>
 
     <Button
         android:id="@+id/back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
+        android:layout_margin="30dp"
         android:text="뒤로가기"
-        android:backgroundTint="#6B80FA"/>
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:backgroundTint="#806B80FA"/>
 </LinearLayout>

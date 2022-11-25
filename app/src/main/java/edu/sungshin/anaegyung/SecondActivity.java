@@ -28,7 +28,6 @@ public class SecondActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     EditText editText;
     Button ok,back;
-    TextView textView;
     String directList[] = {"좌측", "전방", "우측"};
     String detectList[] = {"사람", "자전거", "자동차", "오토바이", "비행기",
             "버스", "기차", "트럭", "배", "신호등",
@@ -62,7 +61,6 @@ public class SecondActivity extends AppCompatActivity {
         editText=findViewById(R.id.editText);
         ok=findViewById(R.id.ok);
         back=findViewById(R.id.back);
-        textView=findViewById(R.id.textView);
         tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
@@ -132,7 +130,6 @@ public class SecondActivity extends AppCompatActivity {
                             int obDirect = userAccount.getObDirect();
 
                             String sent = directList[obDirect] + "에 " + detectList[obIndex] + " 있습니다.";
-                            textView.setText(String.valueOf(userAccount.getObIndex())+" "+String.valueOf(userAccount.getObDirect()));
                             tts.speak(String.valueOf(sent), TextToSpeech.QUEUE_FLUSH, null);
                         }
                     }
@@ -142,7 +139,6 @@ public class SecondActivity extends AppCompatActivity {
 
                     }
                 });
-                textView.setText(String.valueOf(userAccount.getObIndex())+" "+String.valueOf(userAccount.getObDirect()));
             }
         });
 
