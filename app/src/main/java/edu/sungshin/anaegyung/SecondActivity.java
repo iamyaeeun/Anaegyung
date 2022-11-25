@@ -97,7 +97,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View view) {
                 for(int i=0;i<detectList.length;i++){
                     if(editText.getText().toString().equals(detectList[i])){
-                        userAccount.setObIndex(i);
+                        userAccount.setObIndex(i+1);
                         exist=true;
                         detect=detectList[i];
                     }
@@ -128,7 +128,7 @@ public class SecondActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.getValue(UserAccount.class)!=null){
                             UserAccount userAccount=snapshot.getValue(UserAccount.class);
-                            int obIndex = userAccount.getObIndex();
+                            int obIndex = userAccount.getObIndex() -1;
                             int obDirect = userAccount.getObDirect();
 
                             String sent = directList[obDirect] + "에 " + detectList[obIndex] + " 있습니다.";
