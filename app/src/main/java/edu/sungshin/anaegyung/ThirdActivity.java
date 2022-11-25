@@ -48,10 +48,9 @@ public class ThirdActivity extends AppCompatActivity {
             }
         });
 
-        testAccount =new TestAccount(1,0,0);
+        testAccount =new TestAccount(1,0,0,0);
 
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("Anaegyung");;
-
         mDatabaseRef.child("TestAccount").child("info").setValue(testAccount)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -92,10 +91,10 @@ public class ThirdActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 testAccount.setBool(0);
                 testAccount.setDirect(0);
                 testAccount.setIndex(0);
+                testAccount.setSec(0);
 
                 mDatabaseRef.child("TestAccount").child("info").setValue(testAccount)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

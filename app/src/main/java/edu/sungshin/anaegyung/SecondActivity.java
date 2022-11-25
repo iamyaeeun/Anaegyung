@@ -68,7 +68,7 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-        userAccount=new UserAccount(1,0,0);
+        userAccount=new UserAccount(1,0,0,0);
 
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("Anaegyung");
         mDatabaseRef.child("UserAccount").child("info").setValue(userAccount)
@@ -129,6 +129,7 @@ public class SecondActivity extends AppCompatActivity {
                 userAccount.setObBool(0);
                 userAccount.setObDirect(0);
                 userAccount.setObIndex(0);
+                userAccount.setObSec(0);
 
                 mDatabaseRef.child("UserAccount").child("info").setValue(userAccount)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

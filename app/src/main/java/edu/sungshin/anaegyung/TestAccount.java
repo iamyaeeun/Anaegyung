@@ -4,15 +4,17 @@ public class TestAccount {
     private int bool;
     private int index;
     private int direct;
+    private int sec;
 
     public TestAccount(){
 
     };
 
-    public TestAccount(int bl, int idx,int dir){
+    public TestAccount(int bl, int idx,int dir,int s){
         this.bool = bl;
         this.index=idx;
         this.direct=dir;
+        this.sec=s;
     };
 
     public int getIndex() { return index; }
@@ -25,4 +27,6 @@ public class TestAccount {
     public void setBool(int bool) {
         this.bool = bool;
     }
+    public int getSec() { return sec; }
+    public void setSec(int sec) { this.sec = sec; }
 }
