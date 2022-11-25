@@ -93,6 +93,9 @@ public class SecondActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                tts.speak(String.valueOf("확인"), TextToSpeech.QUEUE_FLUSH, null);
+
                 for(int i=0;i<detectList.length;i++){
                     if(editText.getText().toString().equals(detectList[i])){
                         userAccount.setObIndex(i+1);
@@ -149,6 +152,8 @@ public class SecondActivity extends AppCompatActivity {
                 userAccount.setObDirect(0);
                 userAccount.setObIndex(0);
                 userAccount.setObSec(0);
+
+                tts.speak(String.valueOf("뒤로가기"), TextToSpeech.QUEUE_FLUSH, null);
 
                 mDatabaseRef.child("UserAccount").child("info").setValue(userAccount)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

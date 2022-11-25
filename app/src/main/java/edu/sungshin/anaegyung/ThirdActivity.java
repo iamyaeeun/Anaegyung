@@ -93,6 +93,8 @@ public class ThirdActivity extends AppCompatActivity {
                 testAccount.setIndex(0);
                 testAccount.setSec(0);
 
+                tts.speak(String.valueOf("뒤로가기"), TextToSpeech.QUEUE_FLUSH, null);
+
                 mDatabaseRef.child("TestAccount").child("info").setValue(testAccount)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
